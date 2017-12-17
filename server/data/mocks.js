@@ -1,5 +1,5 @@
 export const Mocks = {
-  String: () => 'It works'
+  String: () => 'It works!'
 };
 
 export default Mocks;
