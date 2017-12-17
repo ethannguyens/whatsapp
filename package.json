@@ -6,6 +6,9 @@
   "repository": "git@github.com:ethannguyens/whatsapp.git",
   "author": "Ethan <ethan.nguyens@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch server --watch package.json server/index.js --exec babel-node --presets env,stage-2"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.3",
