@@ -12,6 +12,16 @@ import {
   View
 } from 'react-native';
 
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+import { ApolloProvider, graphql } from 'react-apollo';
+
+const client = new ApolloClient({
+  link: new HttpLink({ uri: 'http://localhost:3000' }),
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+});
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -22,17 +32,20 @@ const instructions = Platform.select({
 export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <ApolloProvider client={client}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            Welcome to React Native!
+          </Text>
+          <Text style={styles.instructions}>
+            To get started, edit index.ios.js
+          </Text>
+          <Text style={styles.instructions}>
+            Press Cmd+R to reload,{'\n'}
+            Cmd+D or shake for dev menu
+          </Text>
+        </View>
+      </ApolloProvider>
     );
   }
 }
